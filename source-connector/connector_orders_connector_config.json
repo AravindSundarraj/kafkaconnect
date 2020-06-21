@@ -1,0 +1,20 @@
+{
+  "name": "orders_connector",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "tasks.max": "1",
+    "errors.log.enable": true,
+    "errors.log.include.messages": true,
+    "connection.url": "jdbc:postgresql://35.226.10.220:5432/guestbook",
+    "connection.user": "postgres",
+    "connection.password": "postgres",
+    "connection.attempts": "1",
+    "table.whitelist": "orders",
+    "mode": "timestamp+incrementing",
+    "incrementing.column.name": "order_id",
+    "timestamp.column.name": "update_date",
+    "poll.interval.ms": "10000",
+    "batch.max.rows": "100",
+    "topic.prefix": "ecommerce-"
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Mongo-Sink-Orders",
+  "config": {
+    "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+    "tasks.max": "1",
+    "errors.log.enable": "true",
+    "errors.log.include.messages": "true",
+    "topics": "ecommerce-orders",
+    "connection.uri": "mongodb://35.192.216.92:27017",
+    "database": "ecommerce",
+    "collection": "mongo_orders",
+    "max.num.retries": "1",
+    "retries.defer.timeout": "10000"
+  }
+}

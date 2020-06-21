@@ -1,0 +1,28 @@
+{
+  "name": "orders_connector_converter",
+  "config": {
+    "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+    "tasks.max": "1",
+    "errors.log.enable": true,
+    "errors.log.include.messages": true,
+    "connection.url": "jdbc:postgresql://35.226.10.220:5432/guestbook",
+    "connection.user": "postgres",
+    "connection.password": "postgres",
+    "connection.attempts": "1",
+    "table.whitelist": "orders",
+    "mode": "timestamp+incrementing",
+    "incrementing.column.name": "order_id",
+    "timestamp.column.name": "update_date",
+    "poll.interval.ms": "10000",
+    "batch.max.rows": "100",
+    "topic.prefix": "ecommconverter-"
+	"transforms":"createKey,extractInt",
+    "transforms.createKey.type":"org.apache.kafka.connect.transforms.ValueToKey",
+    "transforms.createKey.fields":"order_id",
+    "transforms.extractInt.type":"org.apache.kafka.connect.transforms.ExtractField$Key",
+    "transforms.extractInt.field":"order_id"
+	"value.converter": "io.confluent.connect.avro.AvroConverter",
+	"value.converter.schema.registry.url": "http://localhost:8081",
+	"key.converter": "org.apache.kafka.connect.storage.StringConverter"
+  }
+}
